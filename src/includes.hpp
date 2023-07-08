@@ -1,0 +1,6 @@
+#include "LastFmApi.hpp"
+#include "LastFmApi.cpp"
+#include "track.cpp"
+#include "album.cpp"
+#include "artist.cpp"
+#include "utils.hpp"
