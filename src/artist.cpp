@@ -11,14 +11,7 @@ string LastFmApi::getArtistByMbid(string mbid){
 }
 
 string LastFmApi::getArtistName(){
-    string xml = this->last_artist;
-    string name = "";
-
-    tinyxml2::XMLDocument doc;
-    doc.Parse(xml.c_str());
-    name = doc.FirstChildElement("lfm")->FirstChildElement("artist")->FirstChildElement("name")->GetText();
-
-    return name;
+    return getXmlText(this->last_result, vector<string>{"lfm","artist","name"});
 }
 
 vector<string> LastFmApi::getArtistTopTags(){

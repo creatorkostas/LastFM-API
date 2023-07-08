@@ -11,68 +11,59 @@ string LastFmApi::getTrackInfo(string track_name, string artist){
     return str_xml;
 }
 
-string LastFmApi::getName(){
-    string xml = this->last_result;
-    string title = "";
-    tinyxml2::XMLDocument doc;
-    doc.Parse(xml.c_str());
-    title = doc.FirstChildElement("lfm")->FirstChildElement("track")->FirstChildElement("name")->GetText();
-    /*
+/*
     streamable:
     artist:
     alblum:
     toptags:
     wiki:
     */
-    return title;
+vector<string> LastFmApi::getTopTags(){
+    return topTags(this->last_result, "toptags");
 }
 
+// string LastFmApi::getName(){
+//     string xml = this->last_result;
+//     string title = "";
+//     tinyxml2::XMLDocument doc;
+//     doc.Parse(xml.c_str());
+//     title = doc.FirstChildElement("lfm")->FirstChildElement("track")->FirstChildElement("name")->GetText();
+    
+//     return title;
+// }
+
+string LastFmApi::getName(){
+    return getXmlText(this->last_result, vector<string>{"lfm","track","name"});
+}
 
 string LastFmApi::getMbid(){
-    string xml = this->last_result;
-    string mbid = "";
-    tinyxml2::XMLDocument doc;
-    doc.Parse(xml.c_str());
-    mbid = doc.FirstChildElement("lfm")->FirstChildElement("track")->FirstChildElement("mbid")->GetText();
-    return mbid;
+    return getXmlText(this->last_result, vector<string>{"lfm","track","mbid"});
 }
 
 string LastFmApi::getUrl(){
-    string xml = this->last_result;
-    string url = "";
-    tinyxml2::XMLDocument doc;
-    doc.Parse(xml.c_str());
-    url = doc.FirstChildElement("lfm")->FirstChildElement("track")->FirstChildElement("url")->GetText();
-    return url;
+    return getXmlText(this->last_result, vector<string>{"lfm","track","url"});
 }
 
 string LastFmApi::getDuration(){
-    string xml = this->last_result;
-    string duration = "";
-    tinyxml2::XMLDocument doc;
-    doc.Parse(xml.c_str());
-    duration = doc.FirstChildElement("lfm")->FirstChildElement("track")->FirstChildElement("duration")->GetText();
-    return duration;
+    return getXmlText(this->last_result, vector<string>{"lfm","track","duration"});
 }
 
 string LastFmApi::getListeners(){
-    string xml = this->last_result;
-    string listeners = "";
-    tinyxml2::XMLDocument doc;
-    doc.Parse(xml.c_str());
-    listeners = doc.FirstChildElement("lfm")->FirstChildElement("track")->FirstChildElement("listeners")->GetText();
-    return listeners;
+    return getXmlText(this->last_result, vector<string>{"lfm","track","listeners"});
 }
 
 string LastFmApi::getPlaycount(){
-    string xml = this->last_result;
-    string playcount = "";
-    tinyxml2::XMLDocument doc;
-    doc.Parse(xml.c_str());
-    playcount = doc.FirstChildElement("lfm")->FirstChildElement("track")->FirstChildElement("playcount")->GetText();
-    return playcount;
+    return getXmlText(this->last_result, vector<string>{"lfm","track","playcount"});
 }
 
-vector<string> LastFmApi::getTopTags(){
-    return topTags(this->last_result, "toptags");
+string LastFmApi::getTrackArtist(){
+    return getXmlText(this->last_result, vector<string>{"lfm","track","artist","name"});
+}
+
+string LastFmApi::getTrackAlbum(){
+    return getXmlText(this->last_result, vector<string>{"lfm","track","album","title"});
+}
+
+string LastFmApi::getTrackAlbumPosition(){
+    return getXmlAttribute(this->last_result, vector<string>{"lfm","track","album","position"});
 }
