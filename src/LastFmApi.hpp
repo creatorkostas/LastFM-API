@@ -59,7 +59,7 @@ namespace lfapi
         vector<string> getAlbumTopTags();
     };
     
-    LastFmApi::LastFmApi(string key){}
+    LastFmApi::LastFmApi(string key){this->key = key;}
     
     LastFmApi::~LastFmApi(){}
     

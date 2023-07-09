@@ -32,18 +32,18 @@ string LastFmApi::getXmlText(string xml, vector<string> tags){
     tinyxml2::XMLElement* elem;
 
     doc.Parse(xml.c_str());
-
     int depth = tags.size();
     int current_depth = 0;
-
-
     for(string tag: tags){
 
         current_depth++;
+        // cout << "1" << endl;
+        // cout << tag << " " << current_depth << " " << depth << endl;
         if(current_depth == 1) {elem = doc.FirstChildElement(tag.c_str())->ToElement(); continue;}
         if(current_depth == depth) text = elem->FirstChildElement(tag.c_str())->GetText();
         else elem = elem->FirstChildElement(tag.c_str());
         
+// cout << elem->FirstChildElement(tag.c_str())->GetText() << endl;
     }
         
     
@@ -70,7 +70,6 @@ string LastFmApi::getXmlAttribute(string xml, vector<string> tags){
         else elem = elem->FirstChildElement(tag.c_str());
         
     }
-        
     
     return text;
 }
