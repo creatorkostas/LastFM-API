@@ -24,14 +24,27 @@ namespace lfapi
         vector<string> topTags(string tags_xml, string tag_name);
 
         //Xml related functon
-        string getXmlText(string xml, vector<string> tags);
         string getXmlAttribute(string xml, vector<string> tags);
     public:
+        string getXmlText(string xml, vector<string> tags);
+        vector<tinyxml2::XMLElement*> getXmlList(string xml, vector<string> tags );
         LastFmApi(string key);
         ~LastFmApi();
 
+
+        string TrackSearch(string TrackName);
+        int searchResultsNumber(vector<tinyxml2::XMLDocument> xml);
+        vector<string> getSearchInfo(vector<tinyxml2::XMLDocument> xml, int pos);
+
+        string getFirstTrack(string TrackName);
+
         //Get the track info and set it to get the other info
         string getTrackInfo(string TrackName, string artist);
+        string getTrackInfo(string TrackName, int pos);
+        string getTrackInfo(vector<tinyxml2::XMLDocument> xml, int pos);
+        string getTrackInfo(string TrackName);
+
+        string getTrackInfoByMbid(string TrackMbid);
 
         string getName();
         string getMbid();

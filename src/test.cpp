@@ -39,14 +39,36 @@ bool test_basic_info(string key){
 int main(void)
 { 
     string key;
+    cout << "Api key : ";
     cin >> key;
     bool Basic_Info_Test = test_basic_info(key);
-    cout << Basic_Info_Test << endl;
+    if (Basic_Info_Test)
+    {
+        cout << "Pass" << endl;
+    }
+    else
+    {
+        cout << "Fail" << endl;
+    }
+    
 
     // lfapi::LastFmApi fm(key);
-    // fm.getTrackInfo("believe","cher");
-    // string name = fm.getName();
-    // cout << name << endl;
 
+    // string searched_result = fm.TrackSearch("believe");
+    // vector<tinyxml2::XMLElement*> l = fm.getXmlList(searched_result, vector<string>{"lfm", "results", "trackmatches", "track"});
+
+
+    //     // cout << searched_result << endl ;
+    //     cout << "----------------" << endl ;
+    //     cout << l.size() << endl ;
+    //     cout << l[0]->FirstChildElement("name")->GetText() << endl;
+    //     cout << "----------------" << endl ;
+    // for(int i=0;i<l.size();i++){
+    //     cout << i << ":" ;
+        
+    //     cout << l[i]->FirstChildElement("name")->GetText() << " : " << l[i]->FirstChildElement("artist")->GetText() << endl;
+    // } 
+    //     cout << "----------------" << endl ;
+    
     return 0;
 }
