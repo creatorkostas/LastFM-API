@@ -20,7 +20,7 @@ namespace lfapi
         string last_album;
 
         //Tag related functon
-        vector<string> tagsSeperator(tinyxml2::XMLDocument doc);
+        vector<string> tagsSeperator(tinyxml2::XMLDocument* doc);
         vector<string> topTags(string tags_xml, string tag_name);
 
         //Xml related functon
