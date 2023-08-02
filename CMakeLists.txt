@@ -19,4 +19,8 @@ set(INCLUDE
 
 add_library(${PROJECT_NAME} ${SOURCES} ${INCLUDE})
 
-target_link_libraries(${PROJECT_NAME} CliKit)
+# add_library(${PROJECT_NAME} ${SOURCES})
+
+target_link_libraries(${PROJECT_NAME} -lcurl -ltinyxml2)
+
+

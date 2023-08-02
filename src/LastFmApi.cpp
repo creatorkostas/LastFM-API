@@ -8,8 +8,7 @@ vector<string> LastFmApi::topTags(string tags_xml, string tag_name){
 
     tinyxml2::XMLDocument doc;
     doc.Parse(xml.c_str());
-    
-    return tagsSeperator(doc.FirstChildElement("lfm")->FirstChildElement(tag_name.c_str()));
+    return LastFmApi::tagsSeperator(doc.FirstChildElement("lfm")->FirstChildElement(tag_name.c_str())->ToDocument());
 }
 
 
