@@ -13,7 +13,7 @@ static size_t writeToString(void *data, size_t size, size_t nmemb, void *userp)
     return realsize;
 }
 
-string httpGet(string url){
+string httpGet(string url, string user_agent = "", vector<string> string_headers = {}, bool set_host = false){
     CURL *curl;
     CURLcode res;
     string respStr;
@@ -30,6 +30,25 @@ string httpGet(string url){
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &writeToString);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &respStr);
         /* Perform the request, res will get the return code */
+
+        if(set_host){
+            curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+            curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+        }
+
+        if(user_agent != ""){
+            curl_easy_setopt(curl, CURLOPT_USERAGENT, user_agent);
+        }
+
+        if(string_headers.size() != 0){
+            struct curl_slist *headers = NULL;
+            for(string header: string_headers){
+                headers = curl_slist_append(headers, header.c_str());
+            }
+            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+        }
+
+
         res = curl_easy_perform(curl);
         
         /* Check for errors */
