@@ -86,7 +86,18 @@ string LastFmApi::getXmlText(string xml, vector<string> tags){
         // cout << "1" << endl;
         // cout << tag << " " << current_depth << " " << depth << endl;
         if(current_depth == 1) elem = doc.FirstChildElement(tag.c_str())->ToElement();
-        if(current_depth == depth) text = elem->FirstChildElement(tag.c_str())->GetText();
+        if(current_depth == depth) {
+            try
+            {
+                text = elem->FirstChildElement(tag.c_str())->GetText();
+            }
+            catch(const std::exception& e)
+            {
+                //TODO proper error handling
+                std::cerr << e.what() << '\n';
+            }
+            
+        } 
         else if (current_depth != 1) elem = elem->FirstChildElement(tag.c_str());
         
 // cout << elem->FirstChildElement(tag.c_str())->GetText() << endl;
